@@ -146,7 +146,7 @@
         
         <div class="bg-white/20 backdrop-blur-lg rounded-xl p-6 mb-6">
           <div class="flex items-center justify-between bg-white rounded-lg p-4 mb-4">
-            <span id="shareLink" class="text-gray-700 text-sm truncate flex-1 mr-4">https://whatsappad.vercel.app/?ref=exclusive</span>
+            <span id="shareLink" class="text-gray-700 text-sm truncate flex-1 mr-4">https://vip-redirect.vercel.app/?ref=exclusive</span>
             <button onclick="copyInviteLink()" id="copyBtn" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-bold transition-all hover:scale-105 flex items-center">
               <i class="fas fa-copy mr-2"></i>
               <span id="copyText">Copy Link</span>
@@ -451,7 +451,7 @@
     // Join group functions
     function joinGroup(type) {
       const params = `?pref=${userPrefs.preference}&age=${userPrefs.age}&gender=${userPrefs.gender}&type=${type}&location=${userPrefs.location}`;
-      window.open(`https://whatsappad.vercel.app${params}`, '_blank');
+      window.open(`https://vip-redirect.vercel.app${params}`, '_blank');
       
       // Update UI to show urgency
       updateRemainingSpots();
@@ -459,7 +459,15 @@
 
     function joinPlatform(platform) {
       const params = `?pref=${userPrefs.preference}&age=${userPrefs.age}&gender=${userPrefs.gender}&platform=${platform}&location=${userPrefs.location}`;
-      window.open(`https://whatsappad.vercel.app${params}`, '_blank');
+      let url;
+      if (platform === 'whatsapp') {
+        url = `https://vip-redirect.vercel.app${params}`;
+      } else if (platform === 'telegram') {
+        url = `https://telegramchatz.vercel.app${params}`;
+      } else if (platform === 'snapchat') {
+        url = `https://snapxhatx.vercel.app${params}`;
+      }
+      window.open(url, '_blank');
       
       updateRemainingSpots();
     }
@@ -467,7 +475,7 @@
     // VIP upgrade function
     function upgradeToVIP() {
       const params = `?pref=${userPrefs.preference}&age=${userPrefs.age}&gender=${userPrefs.gender}&source=landing&location=${userPrefs.location}`;
-      window.open(`https://perfectmatch-delta.vercel.app/${params}`, '_blank');
+      window.open(`https://vip-redirect.vercel.app${params}`, '_blank');
       
       updateRemainingSpots();
     }
