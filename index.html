@@ -3,31 +3,465 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dating Groups Landing Page</title>
+  <title>💕 Join 50,000+ Singles - Exclusive Dating Groups</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+    @keyframes bounce { 0%, 20%, 53%, 80%, 100% { transform: translateY(0); } 40%, 43% { transform: translateY(-10px); } 70% { transform: translateY(-5px); } }
+    @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+    @keyframes slideIn { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+    .pulse { animation: pulse 2s infinite; }
+    .bounce { animation: bounce 2s infinite; }
+    .float { animation: float 3s ease-in-out infinite; }
+    .slide-in { animation: slideIn 0.5s ease-out; }
+    .spinning { animation: spin 4s linear infinite; }
+    .chat-bubble { animation: slideIn 0.6s ease-out; }
+    .gradient-text { background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-size: 200% 200%; animation: gradient 3s ease infinite; }
+    @keyframes gradient { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+  </style>
 </head>
-<body class="bg-gradient-to-br from-pink-500 to-purple-600 min-h-screen flex items-center justify-center">
-  <div class="text-center space-y-8">
-    <h1 class="text-white text-3xl md:text-5xl font-bold drop-shadow-lg">
-      Join Our Exclusive Dating Groups 💕
-    </h1>
-    <p class="text-white text-lg md:text-xl">
-      Choose your favorite platform and start connecting now
-    </p>
+<body class="bg-gradient-to-br from-pink-500 via-purple-600 to-indigo-700 min-h-screen overflow-x-hidden">
+  <!-- Floating Hearts Animation -->
+  <div class="fixed inset-0 pointer-events-none z-0">
+    <div class="absolute top-10 left-10 text-pink-300 text-2xl float">💖</div>
+    <div class="absolute top-32 right-20 text-purple-300 text-xl float" style="animation-delay: 1s;">💕</div>
+    <div class="absolute bottom-20 left-1/4 text-pink-400 text-lg float" style="animation-delay: 2s;">💗</div>
+    <div class="absolute top-1/2 right-10 text-purple-400 text-2xl float" style="animation-delay: 0.5s;">💝</div>
+  </div>
 
-    <div class="flex flex-col md:flex-row gap-6 justify-center">
-      <!-- Snapchat Button -->
-      <a href="https://snapchat.com" 
-         class="w-72 md:w-80 py-6 rounded-2xl bg-yellow-400 text-black font-extrabold text-2xl shadow-lg hover:scale-105 transition-transform">
-        👉 Join on Snapchat
-      </a>
+  <!-- Main Container -->
+  <div class="relative z-10 container mx-auto px-4 py-8 max-w-6xl">
+    <!-- Top Banner -->
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center bg-red-500 text-white px-6 py-2 rounded-full font-bold pulse mb-4">
+        🔥 TRENDING NOW • <span id="liveCounter" class="ml-2">2,847</span> PEOPLE ONLINE
+      </div>
+      
+      <!-- Location Display -->
+      <div id="locationBanner" class="text-white text-sm mb-4 opacity-75">
+        📍 <span id="userLocation">Loading your location...</span>
+      </div>
 
-      <!-- WhatsApp Button -->
-      <a href="https://wa.me/2348012345678" 
-         class="w-72 md:w-80 py-6 rounded-2xl bg-green-500 text-white font-extrabold text-2xl shadow-lg hover:scale-105 transition-transform">
-        👉 Join WhatsApp Groups
-      </a>
+      <!-- Main Headline -->
+      <h1 class="text-white text-4xl md:text-6xl font-black drop-shadow-2xl mb-4 gradient-text">
+        Find Your Perfect Match Tonight! 💕
+      </h1>
+      
+      <!-- Countdown Timer -->
+      <div class="bg-red-600 text-white px-6 py-3 rounded-lg inline-block font-bold text-lg mb-6 bounce">
+        ⏰ LIMITED TIME: <span id="countdown">23:47:12</span> LEFT TO JOIN TODAY!
+      </div>
+    </div>
+
+    <!-- Success Stories Carousel -->
+    <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-6 mb-8">
+      <h3 class="text-white text-2xl font-bold text-center mb-4">💑 Recent Success Stories</h3>
+      <div id="successCarousel" class="text-center text-white">
+        <div class="carousel-item slide-in">
+          <p class="text-lg">"Met my soulmate in just 3 days! Thanks to these amazing groups!" - Sarah, 24</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Chat Preview -->
+    <div class="bg-black/20 backdrop-blur-lg rounded-2xl p-6 mb-8 max-w-md mx-auto">
+      <h3 class="text-white text-xl font-bold mb-4 text-center">💬 Live Group Chat Preview</h3>
+      <div class="space-y-3" id="chatPreview">
+        <div class="bg-blue-500 text-white p-3 rounded-lg rounded-bl-none chat-bubble">
+          <div class="font-semibold">Jessica, 22</div>
+          <div>Anyone want to grab coffee downtown? ☕</div>
+        </div>
+        <div class="bg-green-500 text-white p-3 rounded-lg rounded-br-none ml-8 chat-bubble" style="animation-delay: 1s;">
+          <div class="font-semibold">Mike, 25</div>
+          <div>I'm free this evening! 😊</div>
+        </div>
+        <div class="bg-purple-500 text-white p-3 rounded-lg rounded-bl-none chat-bubble" style="animation-delay: 2s;">
+          <div class="font-semibold">Emma, 23</div>
+          <div>Count me in! Love meeting new people 💕</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Compatibility Quiz -->
+    <div id="quizSection" class="bg-white/15 backdrop-blur-lg rounded-2xl p-8 mb-8">
+      <h3 class="text-white text-3xl font-bold text-center mb-6">🎯 Find Your Perfect Group Match</h3>
+      
+      <div id="quizStep1" class="text-center">
+        <p class="text-white text-xl mb-6">What are you looking for?</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <button onclick="setPreference('casual')" class="bg-pink-500 hover:bg-pink-600 text-white py-4 px-6 rounded-xl font-bold text-lg transition-all hover:scale-105">
+            😉 Casual Dating
+          </button>
+          <button onclick="setPreference('serious')" class="bg-red-500 hover:bg-red-600 text-white py-4 px-6 rounded-xl font-bold text-lg transition-all hover:scale-105">
+            💖 Serious Relationship
+          </button>
+          <button onclick="setPreference('both')" class="bg-purple-500 hover:bg-purple-600 text-white py-4 px-6 rounded-xl font-bold text-lg transition-all hover:scale-105">
+            🔥 Open to Both
+          </button>
+        </div>
+      </div>
+
+      <div id="quizStep2" class="text-center hidden">
+        <p class="text-white text-xl mb-6">Select your age range:</p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <button onclick="setAge('18-22')" class="bg-blue-500 hover:bg-blue-600 text-white py-3 px-4 rounded-lg font-bold transition-all hover:scale-105">18-22</button>
+          <button onclick="setAge('23-27')" class="bg-indigo-500 hover:bg-indigo-600 text-white py-3 px-4 rounded-lg font-bold transition-all hover:scale-105">23-27</button>
+          <button onclick="setAge('28-32')" class="bg-purple-500 hover:bg-purple-600 text-white py-3 px-4 rounded-lg font-bold transition-all hover:scale-105">28-32</button>
+          <button onclick="setAge('33+')" class="bg-pink-500 hover:bg-pink-600 text-white py-3 px-4 rounded-lg font-bold transition-all hover:scale-105">33+</button>
+        </div>
+      </div>
+
+      <div id="quizStep3" class="text-center hidden">
+        <p class="text-white text-xl mb-6">Choose your gender:</p>
+        <div class="flex justify-center gap-6">
+          <button onclick="setGender('female')" class="bg-pink-500 hover:bg-pink-600 text-white py-4 px-8 rounded-xl font-bold text-lg transition-all hover:scale-105">
+            👩 Female
+          </button>
+          <button onclick="setGender('male')" class="bg-blue-500 hover:bg-blue-600 text-white py-4 px-8 rounded-xl font-bold text-lg transition-all hover:scale-105">
+            👨 Male
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spin Wheel Section -->
+    <div id="spinSection" class="bg-white/15 backdrop-blur-lg rounded-2xl p-8 mb-8 text-center hidden">
+      <h3 class="text-white text-3xl font-bold mb-6">🎡 Spin to Find Your Group!</h3>
+      <div class="relative mx-auto w-64 h-64 mb-6">
+        <div id="spinWheel" class="w-64 h-64 border-8 border-white rounded-full bg-gradient-to-r from-pink-400 via-purple-500 to-indigo-500 flex items-center justify-center text-white text-6xl font-bold cursor-pointer hover:scale-105 transition-all">
+          🎯
+        </div>
+      </div>
+      <button onclick="spinWheel()" class="bg-yellow-500 hover:bg-yellow-600 text-black py-4 px-8 rounded-xl font-bold text-xl transition-all hover:scale-105 bounce">
+        🎲 SPIN NOW!
+      </button>
+    </div>
+
+    <!-- Main Action Buttons -->
+    <div id="actionButtons" class="hidden">
+      <div class="text-center mb-8">
+        <h2 class="text-white text-3xl font-bold mb-6">🚀 Choose Your Access Level</h2>
+        
+        <!-- Premium vs Free Options -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+          <!-- Premium Option -->
+          <div class="bg-gradient-to-b from-yellow-400 to-yellow-600 p-6 rounded-2xl border-4 border-yellow-300 relative overflow-hidden">
+            <div class="absolute top-2 right-2 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold pulse">
+              🔥 POPULAR
+            </div>
+            <h3 class="text-black text-2xl font-bold mb-4">⭐ VIP Premium Groups</h3>
+            <div class="text-black text-lg mb-4">
+              <div class="flex justify-center items-center mb-2">
+                <span class="text-3xl font-bold">4.9</span>
+                <div class="ml-2 text-yellow-800">⭐⭐⭐⭐⭐</div>
+              </div>
+              <p class="text-sm">(2,847 verified reviews)</p>
+            </div>
+            <ul class="text-black text-left mb-6 space-y-2">
+              <li>✅ Verified profiles only</li>
+              <li>✅ Private exclusive chats</li>
+              <li>✅ Video call features</li>
+              <li>✅ Priority matching</li>
+              <li>✅ 24/7 moderation</li>
+            </ul>
+            <button onclick="joinGroup('premium')" class="w-full bg-black text-yellow-400 py-4 px-6 rounded-xl font-bold text-xl transition-all hover:scale-105 hover:bg-gray-800">
+              💎 JOIN VIP GROUPS
+            </button>
+            <p class="text-black text-sm mt-2">Limited to 50 members per day</p>
+          </div>
+
+          <!-- Free Option -->
+          <div class="bg-gradient-to-b from-green-400 to-green-600 p-6 rounded-2xl">
+            <h3 class="text-white text-2xl font-bold mb-4">📱 Free Community Groups</h3>
+            <div class="text-white text-lg mb-4">
+              <div class="flex justify-center items-center mb-2">
+                <span class="text-3xl font-bold">4.2</span>
+                <div class="ml-2">⭐⭐⭐⭐☆</div>
+              </div>
+              <p class="text-sm">(1,432 reviews)</p>
+            </div>
+            <ul class="text-white text-left mb-6 space-y-2">
+              <li>✅ Open community chat</li>
+              <li>✅ Basic matching</li>
+              <li>✅ Group events</li>
+              <li>✅ Friendship focus</li>
+            </ul>
+            <button onclick="joinGroup('free')" class="w-full bg-white text-green-600 py-4 px-6 rounded-xl font-bold text-xl transition-all hover:scale-105 hover:bg-gray-100">
+              🆓 JOIN FREE GROUPS
+            </button>
+            <p class="text-white text-sm mt-2">Unlimited access</p>
+          </div>
+        </div>
+
+        <!-- Platform Selection -->
+        <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-6 mb-8">
+          <h3 class="text-white text-2xl font-bold mb-6">📱 Choose Your Preferred Platform</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <button onclick="joinPlatform('whatsapp')" class="bg-green-500 hover:bg-green-600 text-white py-6 px-6 rounded-xl font-bold text-xl transition-all hover:scale-105">
+              <i class="fab fa-whatsapp text-3xl mb-2"></i><br>
+              WhatsApp Groups<br>
+              <span class="text-sm">Most Popular</span>
+            </button>
+            <button onclick="joinPlatform('telegram')" class="bg-blue-500 hover:bg-blue-600 text-white py-6 px-6 rounded-xl font-bold text-xl transition-all hover:scale-105">
+              <i class="fab fa-telegram text-3xl mb-2"></i><br>
+              Telegram VIP<br>
+              <span class="text-sm">Premium Features</span>
+            </button>
+            <button onclick="joinPlatform('snapchat')" class="bg-yellow-400 hover:bg-yellow-500 text-black py-6 px-6 rounded-xl font-bold text-xl transition-all hover:scale-105">
+              <i class="fab fa-snapchat text-3xl mb-2"></i><br>
+              Snapchat Stories<br>
+              <span class="text-sm">Young & Fun</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Social Proof Section -->
+    <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-6 mb-8">
+      <div class="text-center text-white">
+        <h3 class="text-2xl font-bold mb-4">🏆 Trusted by Thousands</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div>
+            <div class="text-3xl font-bold text-yellow-400" id="totalMembers">47,832</div>
+            <div class="text-sm">Happy Members</div>
+          </div>
+          <div>
+            <div class="text-3xl font-bold text-green-400" id="successRate">94%</div>
+            <div class="text-sm">Success Rate</div>
+          </div>
+          <div>
+            <div class="text-3xl font-bold text-pink-400" id="dailyMatches">1,247</div>
+            <div class="text-sm">Daily Matches</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-6 mb-8">
+      <h3 class="text-white text-xl font-bold mb-4">📈 Recent Activity</h3>
+      <div id="recentActivity" class="text-white space-y-2 text-sm">
+        <div class="slide-in">👩 Sarah from New York just joined Premium Groups</div>
+        <div class="slide-in" style="animation-delay: 0.5s;">👨 Mike from California found his match!</div>
+        <div class="slide-in" style="animation-delay: 1s;">👩 Emma from Texas joined WhatsApp Groups</div>
+        <div class="slide-in" style="animation-delay: 1.5s;">👨 James from Florida upgraded to VIP</div>
+      </div>
+    </div>
+
+    <!-- Media Mentions -->
+    <div class="text-center text-white/75 text-sm mb-8">
+      <p>As featured in: DatingNews.com • SinglesToday.net • MatchMaker Magazine</p>
+    </div>
+
+    <!-- Daily Limit Warning -->
+    <div id="dailyLimit" class="bg-red-600/80 backdrop-blur-lg text-white p-4 rounded-lg text-center font-bold mb-8 pulse">
+      ⚠️ ONLY <span id="remainingSpots">23</span> SPOTS LEFT TODAY! Join now before we're full.
+    </div>
+
+    <!-- Footer -->
+    <div class="text-center text-white/50 text-xs">
+      <p>© 2025 Premium Dating Groups. All rights reserved. | Privacy Policy | Terms of Service</p>
     </div>
   </div>
+
+  <script>
+    // Global variables for user preferences
+    let userPrefs = { preference: '', age: '', gender: '', location: '' };
+    
+    // Live counter animation
+    function updateLiveCounter() {
+      const counter = document.getElementById('liveCounter');
+      const current = parseInt(counter.textContent.replace(',', ''));
+      const change = Math.floor(Math.random() * 10) - 5;
+      const newValue = Math.max(2800, current + change);
+      counter.textContent = newValue.toLocaleString();
+    }
+    setInterval(updateLiveCounter, 3000);
+
+    // Countdown timer
+    function updateCountdown() {
+      const countdown = document.getElementById('countdown');
+      let time = countdown.textContent.split(':');
+      let hours = parseInt(time[0]);
+      let minutes = parseInt(time[1]);
+      let seconds = parseInt(time[2]);
+      
+      seconds--;
+      if (seconds < 0) {
+        seconds = 59;
+        minutes--;
+        if (minutes < 0) {
+          minutes = 59;
+          hours--;
+          if (hours < 0) {
+            hours = 23;
+          }
+        }
+      }
+      
+      countdown.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+    setInterval(updateCountdown, 1000);
+
+    // Success stories carousel
+    const stories = [
+      '"Met my soulmate in just 3 days! Thanks to these amazing groups!" - Sarah, 24',
+      '"Found true love here after trying everything else!" - Mike, 27',
+      '"Best decision ever! Married 6 months after joining!" - Emma, 25',
+      '"So many genuine people here, love it!" - Jake, 29',
+      '"Finally found someone who gets me!" - Lisa, 26'
+    ];
+    
+    let storyIndex = 0;
+    function rotateStories() {
+      const carousel = document.getElementById('successCarousel');
+      carousel.innerHTML = `<div class="carousel-item slide-in"><p class="text-lg">${stories[storyIndex]}</p></div>`;
+      storyIndex = (storyIndex + 1) % stories.length;
+    }
+    setInterval(rotateStories, 4000);
+
+    // Location detection
+    function detectLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            // In a real app, you'd reverse geocode these coordinates
+            const cities = ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix', 'Philadelphia', 'San Antonio', 'San Diego', 'Dallas', 'San Jose'];
+            const randomCity = cities[Math.floor(Math.random() * cities.length)];
+            document.getElementById('userLocation').textContent = `Join ${Math.floor(Math.random() * 500 + 100)} singles in ${randomCity}`;
+            userPrefs.location = randomCity;
+          },
+          () => {
+            document.getElementById('userLocation').textContent = 'Join thousands of singles nationwide';
+          }
+        );
+      }
+    }
+    detectLocation();
+
+    // Quiz functions
+    function setPreference(pref) {
+      userPrefs.preference = pref;
+      document.getElementById('quizStep1').classList.add('hidden');
+      document.getElementById('quizStep2').classList.remove('hidden');
+    }
+
+    function setAge(age) {
+      userPrefs.age = age;
+      document.getElementById('quizStep2').classList.add('hidden');
+      document.getElementById('quizStep3').classList.remove('hidden');
+    }
+
+    function setGender(gender) {
+      userPrefs.gender = gender;
+      document.getElementById('quizStep3').classList.add('hidden');
+      document.getElementById('spinSection').classList.remove('hidden');
+    }
+
+    // Spin wheel function
+    function spinWheel() {
+      const wheel = document.getElementById('spinWheel');
+      wheel.classList.add('spinning');
+      
+      setTimeout(() => {
+        wheel.classList.remove('spinning');
+        document.getElementById('spinSection').classList.add('hidden');
+        document.getElementById('actionButtons').classList.remove('hidden');
+        
+        // Add personalized message based on preferences
+        const message = document.createElement('div');
+        message.className = 'bg-green-500 text-white p-4 rounded-lg text-center font-bold mb-4 slide-in';
+        message.innerHTML = `🎉 Perfect! We found ${userPrefs.preference} groups for ${userPrefs.gender}s aged ${userPrefs.age} in ${userPrefs.location || 'your area'}!`;
+        document.getElementById('actionButtons').insertBefore(message, document.getElementById('actionButtons').firstChild);
+      }, 2000);
+    }
+
+    // Join group functions
+    function joinGroup(type) {
+      const params = `?pref=${userPrefs.preference}&age=${userPrefs.age}&gender=${userPrefs.gender}&type=${type}&location=${userPrefs.location}`;
+      window.open(`https://whatsappad.vercel.app${params}`, '_blank');
+      
+      // Update UI to show urgency
+      updateRemainingSpots();
+    }
+
+    function joinPlatform(platform) {
+      const params = `?pref=${userPrefs.preference}&age=${userPrefs.age}&gender=${userPrefs.gender}&platform=${platform}&location=${userPrefs.location}`;
+      window.open(`https://whatsappad.vercel.app${params}`, '_blank');
+      
+      updateRemainingSpots();
+    }
+
+    // Update remaining spots
+    function updateRemainingSpots() {
+      const spots = document.getElementById('remainingSpots');
+      const current = parseInt(spots.textContent);
+      if (current > 1) {
+        spots.textContent = current - 1;
+      }
+    }
+
+    // Periodically update social proof numbers
+    function updateStats() {
+      const members = document.getElementById('totalMembers');
+      const matches = document.getElementById('dailyMatches');
+      
+      // Slowly increment numbers
+      members.textContent = (parseInt(members.textContent.replace(',', '')) + Math.floor(Math.random() * 3)).toLocaleString();
+      matches.textContent = (parseInt(matches.textContent.replace(',', '')) + Math.floor(Math.random() * 5)).toLocaleString();
+    }
+    setInterval(updateStats, 10000);
+
+    // Add new recent activities
+    function addRecentActivity() {
+      const activities = [
+        '👩 Jessica from Miami just found her match!',
+        '👨 Alex from Seattle joined Premium Groups',
+        '👩 Maria from Denver upgraded to VIP',
+        '👨 Chris from Boston joined WhatsApp Groups',
+        '👩 Ashley from Phoenix found love here!',
+        '👨 Ryan from Austin just joined'
+      ];
+      
+      const activityContainer = document.getElementById('recentActivity');
+      const newActivity = document.createElement('div');
+      newActivity.className = 'slide-in';
+      newActivity.textContent = activities[Math.floor(Math.random() * activities.length)];
+      
+      activityContainer.insertBefore(newActivity, activityContainer.firstChild);
+      if (activityContainer.children.length > 5) {
+        activityContainer.removeChild(activityContainer.lastChild);
+      }
+    }
+    setInterval(addRecentActivity, 8000);
+
+    // Flash bonus popup
+    let bonusShown = false;
+    setTimeout(() => {
+      if (!bonusShown) {
+        const bonus = document.createElement('div');
+        bonus.className = 'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-red-600 text-white p-6 rounded-xl text-center z-50 shadow-2xl';
+        bonus.innerHTML = `
+          <h3 class="text-2xl font-bold mb-4">🎁 FLASH BONUS!</h3>
+          <p class="mb-4">Join in the next 10 minutes and get:</p>
+          <ul class="text-left mb-4">
+            <li>✅ FREE Premium access for 7 days</li>
+            <li>✅ VIP matching priority</li>
+            <li>✅ Exclusive member perks</li>
+          </ul>
+          <button onclick="this.parentElement.remove(); joinGroup('bonus')" class="bg-yellow-500 text-black px-6 py-3 rounded-lg font-bold hover:bg-yellow-400">
+            🚀 CLAIM BONUS NOW
+          </button>
+          <button onclick="this.parentElement.remove()" class="block text-sm text-red-200 mt-2 hover:text-white">
+            No thanks, I'll pay full price later
+          </button>
+        `;
+        document.body.appendChild(bonus);
+        bonusShown = true;
+      }
+    }, 15000);
+  </script>
 </body>
 </html>
