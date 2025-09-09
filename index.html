@@ -142,11 +142,11 @@
     <div id="referralSection" class="bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl p-8 mb-8 text-center hidden border-4 border-yellow-300">
       <div class="text-black">
         <h3 class="text-3xl font-bold mb-4">🔑 Unlock VIP Access Now!</h3>
-        <p class="text-xl mb-6">Share this exclusive link with just 2 friends to unlock our premium VIP groups instantly!</p>
+        <p class="text-xl mb-6">Share this exclusive link with just 5 friends to unlock our premium VIP groups instantly!</p>
         
         <div class="bg-white/20 backdrop-blur-lg rounded-xl p-6 mb-6">
           <div class="flex items-center justify-between bg-white rounded-lg p-4 mb-4">
-            <span id="shareLink" class="text-gray-700 text-sm truncate flex-1 mr-4">https://vip-redirect.vercel.app/?ref=exclusive</span>
+            <span id="shareLink" class="text-gray-700 text-sm truncate flex-1 mr-4">https://drsweetgrups.vercel.app/?ref=exclusive</span>
             <button onclick="copyInviteLink()" id="copyBtn" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-bold transition-all hover:scale-105 flex items-center">
               <i class="fas fa-copy mr-2"></i>
               <span id="copyText">Copy Link</span>
@@ -171,16 +171,16 @@
           <div class="bg-green-600 text-white p-4 rounded-lg">
             <h4 class="font-bold text-lg mb-2">🎁 Sharing Rewards:</h4>
             <ul class="text-left space-y-1">
-              <li>✅ 2 shares = Instant VIP access</li>
-              <li>✅ 5 shares = Premium features for 30 days</li>
-              <li>✅ 10 shares = Lifetime VIP membership</li>
+              <li>✅ 5 shares = Instant VIP access</li>
+              <li>✅ 10 shares = Premium features for 30 days</li>
+              <li>✅ 15 shares = Lifetime VIP membership</li>
             </ul>
           </div>
         </div>
 
         <div class="flex items-center justify-center mb-6">
           <div class="bg-white rounded-full px-6 py-3 font-bold text-2xl">
-            <span id="shareCount" class="text-green-600">0</span>/2 friends shared
+            <span id="shareCount" class="text-green-600">0</span>/5 friends shared
           </div>
         </div>
 
@@ -557,7 +557,7 @@
 
     // Viral Growth Functions
     let shareCount = 0;
-    let shareTarget = 2;
+    let shareTarget = 5;
     
     // Copy invite link function
     function copyInviteLink() {
