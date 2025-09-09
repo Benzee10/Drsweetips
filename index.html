@@ -138,6 +138,73 @@
       </button>
     </div>
 
+    <!-- Viral Growth Referral Section -->
+    <div id="referralSection" class="bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl p-8 mb-8 text-center hidden border-4 border-yellow-300">
+      <div class="text-black">
+        <h3 class="text-3xl font-bold mb-4">🔑 Unlock VIP Access Now!</h3>
+        <p class="text-xl mb-6">Share this exclusive link with just 2 friends to unlock our premium VIP groups instantly!</p>
+        
+        <div class="bg-white/20 backdrop-blur-lg rounded-xl p-6 mb-6">
+          <div class="flex items-center justify-between bg-white rounded-lg p-4 mb-4">
+            <span id="shareLink" class="text-gray-700 text-sm truncate flex-1 mr-4">https://whatsappad.vercel.app/?ref=exclusive</span>
+            <button onclick="copyInviteLink()" id="copyBtn" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-bold transition-all hover:scale-105 flex items-center">
+              <i class="fas fa-copy mr-2"></i>
+              <span id="copyText">Copy Link</span>
+            </button>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <button onclick="shareToWhatsApp()" class="bg-green-500 hover:bg-green-600 text-white py-3 px-4 rounded-lg font-bold transition-all hover:scale-105">
+              <i class="fab fa-whatsapp mr-2"></i>
+              Share on WhatsApp
+            </button>
+            <button onclick="shareToTelegram()" class="bg-blue-500 hover:bg-blue-600 text-white py-3 px-4 rounded-lg font-bold transition-all hover:scale-105">
+              <i class="fab fa-telegram mr-2"></i>
+              Share on Telegram
+            </button>
+            <button onclick="shareToSnapchat()" class="bg-yellow-500 hover:bg-yellow-600 text-black py-3 px-4 rounded-lg font-bold transition-all hover:scale-105">
+              <i class="fab fa-snapchat mr-2"></i>
+              Share on Snapchat
+            </button>
+          </div>
+          
+          <div class="bg-green-600 text-white p-4 rounded-lg">
+            <h4 class="font-bold text-lg mb-2">🎁 Sharing Rewards:</h4>
+            <ul class="text-left space-y-1">
+              <li>✅ 2 shares = Instant VIP access</li>
+              <li>✅ 5 shares = Premium features for 30 days</li>
+              <li>✅ 10 shares = Lifetime VIP membership</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-center mb-6">
+          <div class="bg-white rounded-full px-6 py-3 font-bold text-2xl">
+            <span id="shareCount" class="text-green-600">0</span>/2 friends shared
+          </div>
+        </div>
+
+        <button onclick="skipReferral()" class="text-black underline hover:text-gray-700 text-sm">
+          Skip for now (pay full price later)
+        </button>
+      </div>
+    </div>
+
+    <!-- Quick Share Floating Button -->
+    <div id="floatingShare" class="fixed bottom-6 right-6 z-50 hidden">
+      <button onclick="toggleShareMenu()" class="bg-gradient-to-r from-pink-500 to-purple-600 text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-all bounce">
+        <i class="fas fa-share-alt text-xl"></i>
+      </button>
+      
+      <div id="shareMenu" class="absolute bottom-16 right-0 bg-white rounded-lg shadow-2xl p-4 hidden min-w-64">
+        <h4 class="font-bold text-gray-800 mb-3">🔗 Share & Unlock More!</h4>
+        <button onclick="copyInviteLink()" class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg font-bold mb-2 transition-all">
+          <i class="fas fa-copy mr-2"></i>Copy Invite Link
+        </button>
+        <p class="text-gray-600 text-xs">Share this with friends & unlock premium access!</p>
+      </div>
+    </div>
+
     <!-- Main Action Buttons -->
     <div id="actionButtons" class="hidden">
       <div class="text-center mb-8">
@@ -368,13 +435,16 @@
       setTimeout(() => {
         wheel.classList.remove('spinning');
         document.getElementById('spinSection').classList.add('hidden');
-        document.getElementById('actionButtons').classList.remove('hidden');
+        document.getElementById('referralSection').classList.remove('hidden');
         
-        // Add personalized message based on preferences
+        // Show floating share button
+        document.getElementById('floatingShare').classList.remove('hidden');
+        
+        // Add personalized message to referral section
         const message = document.createElement('div');
         message.className = 'bg-green-500 text-white p-4 rounded-lg text-center font-bold mb-4 slide-in';
         message.innerHTML = `🎉 Perfect! We found ${userPrefs.preference} groups for ${userPrefs.gender}s aged ${userPrefs.age} in ${userPrefs.location || 'your area'}!`;
-        document.getElementById('actionButtons').insertBefore(message, document.getElementById('actionButtons').firstChild);
+        document.getElementById('referralSection').insertBefore(message, document.getElementById('referralSection').firstChild);
       }, 2000);
     }
 
@@ -462,6 +532,127 @@
         bonusShown = true;
       }
     }, 15000);
+
+    // Viral Growth Functions
+    let shareCount = 0;
+    let shareTarget = 2;
+    
+    // Copy invite link function
+    function copyInviteLink() {
+      const link = document.getElementById('shareLink').textContent;
+      navigator.clipboard.writeText(link).then(() => {
+        const copyBtn = document.getElementById('copyText');
+        const originalText = copyBtn.textContent;
+        copyBtn.textContent = 'Copied!';
+        copyBtn.parentElement.classList.add('bg-green-500');
+        copyBtn.parentElement.classList.remove('bg-blue-500');
+        
+        setTimeout(() => {
+          copyBtn.textContent = originalText;
+          copyBtn.parentElement.classList.remove('bg-green-500');
+          copyBtn.parentElement.classList.add('bg-blue-500');
+        }, 2000);
+        
+        // Increment share count
+        incrementShareCount();
+      }).catch(() => {
+        alert('Please manually copy this link: ' + link);
+      });
+    }
+
+    // Share to platforms
+    function shareToWhatsApp() {
+      const link = document.getElementById('shareLink').textContent;
+      const message = `🔥 Check out these exclusive dating groups! Just found amazing singles here: ${link}`;
+      window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
+      incrementShareCount();
+    }
+
+    function shareToTelegram() {
+      const link = document.getElementById('shareLink').textContent;
+      const message = `💕 Found the best dating groups! Join me here: ${link}`;
+      window.open(`https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent(message)}`, '_blank');
+      incrementShareCount();
+    }
+
+    function shareToSnapchat() {
+      const link = document.getElementById('shareLink').textContent;
+      // Copy link and show instructions for Snapchat
+      navigator.clipboard.writeText(link);
+      alert('Link copied! Now paste it in your Snapchat story or send to friends!');
+      incrementShareCount();
+    }
+
+    // Increment share count and check if threshold reached
+    function incrementShareCount() {
+      shareCount++;
+      document.getElementById('shareCount').textContent = shareCount;
+      
+      if (shareCount >= shareTarget) {
+        // Unlock VIP access
+        setTimeout(() => {
+          const celebration = document.createElement('div');
+          celebration.className = 'fixed inset-0 bg-black/50 flex items-center justify-center z-50';
+          celebration.innerHTML = `
+            <div class="bg-gradient-to-r from-green-400 to-blue-500 p-8 rounded-2xl text-center text-white max-w-md mx-4">
+              <h2 class="text-3xl font-bold mb-4">🎉 VIP UNLOCKED!</h2>
+              <p class="text-xl mb-6">Congratulations! You've shared with ${shareCount} friends and unlocked VIP access!</p>
+              <button onclick="this.parentElement.parentElement.remove(); showVIPAccess()" class="bg-yellow-500 text-black px-8 py-3 rounded-lg font-bold text-xl hover:bg-yellow-400">
+                🚀 ACCESS VIP GROUPS NOW
+              </button>
+            </div>
+          `;
+          document.body.appendChild(celebration);
+        }, 500);
+      }
+    }
+
+    // Show VIP access after sharing requirement met
+    function showVIPAccess() {
+      document.getElementById('referralSection').classList.add('hidden');
+      document.getElementById('actionButtons').classList.remove('hidden');
+      
+      // Update buttons to show VIP unlocked
+      const vipMessage = document.createElement('div');
+      vipMessage.className = 'bg-green-500 text-white p-4 rounded-lg text-center font-bold mb-4 slide-in';
+      vipMessage.innerHTML = `✅ VIP ACCESS UNLOCKED! You can now join any premium group for FREE!`;
+      document.getElementById('actionButtons').insertBefore(vipMessage, document.getElementById('actionButtons').firstChild);
+    }
+
+    // Skip referral requirement
+    function skipReferral() {
+      document.getElementById('referralSection').classList.add('hidden');
+      document.getElementById('actionButtons').classList.remove('hidden');
+      
+      // Show skip message
+      const skipMessage = document.createElement('div');
+      skipMessage.className = 'bg-orange-500 text-white p-4 rounded-lg text-center font-bold mb-4 slide-in';
+      skipMessage.innerHTML = `⚠️ Skipped sharing - Premium groups available at regular pricing`;
+      document.getElementById('actionButtons').insertBefore(skipMessage, document.getElementById('actionButtons').firstChild);
+    }
+
+    // Toggle floating share menu
+    function toggleShareMenu() {
+      const menu = document.getElementById('shareMenu');
+      menu.classList.toggle('hidden');
+    }
+
+    // Close share menu when clicking outside
+    document.addEventListener('click', function(event) {
+      const shareMenu = document.getElementById('shareMenu');
+      const shareButton = event.target.closest('#floatingShare');
+      
+      if (!shareButton && !shareMenu.contains(event.target)) {
+        shareMenu.classList.add('hidden');
+      }
+    });
+
+    // Show floating share button after 10 seconds if not already shown
+    setTimeout(() => {
+      if (document.getElementById('floatingShare').classList.contains('hidden')) {
+        document.getElementById('floatingShare').classList.remove('hidden');
+      }
+    }, 10000);
   </script>
 </body>
 </html>
