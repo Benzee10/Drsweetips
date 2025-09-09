@@ -232,7 +232,7 @@
               <li>✅ Priority matching</li>
               <li>✅ 24/7 moderation</li>
             </ul>
-            <button onclick="joinGroup('premium')" class="w-full bg-black text-yellow-400 py-4 px-6 rounded-xl font-bold text-xl transition-all hover:scale-105 hover:bg-gray-800">
+            <button onclick="upgradeToVIP()" class="w-full bg-black text-yellow-400 py-4 px-6 rounded-xl font-bold text-xl transition-all hover:scale-105 hover:bg-gray-800">
               💎 JOIN VIP GROUPS
             </button>
             <p class="text-black text-sm mt-2">Limited to 50 members per day</p>
@@ -464,6 +464,20 @@
       updateRemainingSpots();
     }
 
+    // VIP upgrade function
+    function upgradeToVIP() {
+      const params = `?pref=${userPrefs.preference}&age=${userPrefs.age}&gender=${userPrefs.gender}&source=landing&location=${userPrefs.location}`;
+      window.open(`https://perfectmatch-delta.vercel.app/${params}`, '_blank');
+      
+      updateRemainingSpots();
+    }
+
+    // Flash bonus claim function
+    function claimFlashBonus() {
+      const params = `?pref=${userPrefs.preference}&age=${userPrefs.age}&gender=${userPrefs.gender}&source=flash_bonus&promo=7days_free&location=${userPrefs.location}`;
+      window.open(`https://perfectmatch-delta.vercel.app/${params}`, '_blank');
+    }
+
     // Update remaining spots
     function updateRemainingSpots() {
       const spots = document.getElementById('remainingSpots');
@@ -521,7 +535,7 @@
             <li>✅ VIP matching priority</li>
             <li>✅ Exclusive member perks</li>
           </ul>
-          <button onclick="this.parentElement.remove(); joinGroup('bonus')" class="bg-yellow-500 text-black px-6 py-3 rounded-lg font-bold hover:bg-yellow-400">
+          <button onclick="this.parentElement.remove(); claimFlashBonus()" class="bg-yellow-500 text-black px-6 py-3 rounded-lg font-bold hover:bg-yellow-400">
             🚀 CLAIM BONUS NOW
           </button>
           <button onclick="this.parentElement.remove()" class="block text-sm text-red-200 mt-2 hover:text-white">
@@ -621,14 +635,14 @@
 
     // Skip referral requirement
     function skipReferral() {
-      document.getElementById('referralSection').classList.add('hidden');
-      document.getElementById('actionButtons').classList.remove('hidden');
+      const params = `?pref=${userPrefs.preference}&age=${userPrefs.age}&gender=${userPrefs.gender}&source=skip_referral&location=${userPrefs.location}`;
+      window.open(`https://perfectmatch-delta.vercel.app/${params}`, '_blank');
       
       // Show skip message
       const skipMessage = document.createElement('div');
       skipMessage.className = 'bg-orange-500 text-white p-4 rounded-lg text-center font-bold mb-4 slide-in';
-      skipMessage.innerHTML = `⚠️ Skipped sharing - Premium groups available at regular pricing`;
-      document.getElementById('actionButtons').insertBefore(skipMessage, document.getElementById('actionButtons').firstChild);
+      skipMessage.innerHTML = `💳 Redirecting to VIP payment page - Premium access available now!`;
+      document.getElementById('referralSection').insertBefore(skipMessage, document.querySelector('#referralSection > div'));
     }
 
     // Toggle floating share menu
