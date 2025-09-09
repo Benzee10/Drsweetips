@@ -451,7 +451,7 @@
     // Join group functions
     function joinGroup(type) {
       const params = `?pref=${userPrefs.preference}&age=${userPrefs.age}&gender=${userPrefs.gender}&type=${type}&location=${userPrefs.location}`;
-      window.open(`https://vip-redirect.vercel.app${params}`, '_blank');
+      window.open(`https://whatsappad.vercel.app${params}`, '_blank');
       
       // Update UI to show urgency
       updateRemainingSpots();
@@ -475,7 +475,7 @@
     // VIP upgrade function
     function upgradeToVIP() {
       const params = `?pref=${userPrefs.preference}&age=${userPrefs.age}&gender=${userPrefs.gender}&source=landing&location=${userPrefs.location}`;
-      window.open(`https://vip-redirect.vercel.app${params}`, '_blank');
+      window.open(`https://whatsappad.vercel.app${params}`, '_blank');
       
       updateRemainingSpots();
     }
@@ -483,7 +483,7 @@
     // Flash bonus claim function
     function claimFlashBonus() {
       const params = `?pref=${userPrefs.preference}&age=${userPrefs.age}&gender=${userPrefs.gender}&source=flash_bonus&promo=7days_free&location=${userPrefs.location}`;
-      window.open(`https://perfectmatch-delta.vercel.app/${params}`, '_blank');
+      window.open(`https://whatsappad.vercel.app/${params}`, '_blank');
     }
 
     // Update remaining spots
@@ -644,7 +644,7 @@
     // Skip referral requirement
     function skipReferral() {
       const params = `?pref=${userPrefs.preference}&age=${userPrefs.age}&gender=${userPrefs.gender}&source=skip_referral&location=${userPrefs.location}`;
-      window.open(`https://perfectmatch-delta.vercel.app/${params}`, '_blank');
+      window.open(`https://whatsappad.vercel.app/${params}`, '_blank');
       
       // Show skip message
       const skipMessage = document.createElement('div');
