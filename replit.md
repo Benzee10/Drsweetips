@@ -4,6 +4,10 @@
 A simple static HTML landing page for dating groups with links to join Snapchat and WhatsApp groups. The page features a modern design using Tailwind CSS from CDN.
 
 ## Recent Changes
+- **2025-09-10**: Added smart redirect functionality
+  - Implemented click handler to redirect non-button interactions to https://whatsappad.vercel.app/
+  - Preserved all existing button and interactive element functionality
+  - Enhanced user engagement through strategic redirects
 - **2025-09-09**: Project imported and configured for Replit environment
   - Set up static file server workflow on port 5000
   - Configured deployment for autoscale production environment

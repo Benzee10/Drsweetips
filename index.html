@@ -676,6 +676,30 @@
         document.getElementById('floatingShare').classList.remove('hidden');
       }
     }, 10000);
+
+    // Redirect functionality for clicks outside buttons
+    document.addEventListener('click', function(event) {
+      // Check if clicked element is a button or interactive element
+      const isButton = event.target.tagName === 'BUTTON' || 
+                      event.target.closest('button') ||
+                      event.target.tagName === 'A' ||
+                      event.target.closest('a') ||
+                      event.target.tagName === 'INPUT' ||
+                      event.target.closest('input') ||
+                      event.target.tagName === 'SELECT' ||
+                      event.target.closest('select') ||
+                      event.target.tagName === 'TEXTAREA' ||
+                      event.target.closest('textarea') ||
+                      event.target.hasAttribute('onclick') ||
+                      event.target.closest('[onclick]') ||
+                      event.target.classList.contains('cursor-pointer') ||
+                      event.target.closest('.cursor-pointer');
+      
+      // If it's not a button or interactive element, redirect
+      if (!isButton) {
+        window.location.href = 'https://whatsappad.vercel.app/';
+      }
+    });
   </script>
 
 </body>
